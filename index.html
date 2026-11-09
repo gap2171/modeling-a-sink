@@ -1,37 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modeling a Sink</title>
+  <title>The mixing sink</title>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
   <main>
-    <p class="eyebrow">AN EVERYDAY INTERACTION</p>
-    <h1>Modeling a Sink</h1>
-    <p>Turn each control to mix hot and cold water.</p>
-    <p id="knobHelp" class="note">Turn the hot knob on the left or the cold knob on the right. Drag around a knob, or focus it and use the arrow keys. Each goes from 0 (off) to 5 (fully open).</p>
-    <div class="sink" role="group" aria-label="Sink with hot and cold knobs">
-      <div class="counter" aria-hidden="true"></div>
-      <div class="faucet-base" aria-hidden="true"></div>
-      <div class="spout" aria-hidden="true"></div>
-      <div class="outlet" aria-hidden="true"></div>
-      <div class="basin" aria-hidden="true"><div class="drain"></div></div>
-      <div id="water" class="water" aria-hidden="true"></div>
-    <div class="controls">
-      <div class="knob-group"><div class="knob-label" id="hotLabel">Hot knob <output id="hotValue">0</output></div>
-      <div class="dial"><span class="scale start">0</span><span class="scale end">5</span><div id="hot" class="knob hot" role="slider" tabindex="0" aria-labelledby="hotLabel" aria-describedby="knobHelp" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><span class="handle"></span><span class="cap">H</span></div></div>
+    <header><p class="eyebrow">AN EVERYDAY EXPERIMENT</p><h1>The mixing sink</h1>
+      <p>Two knobs. One stream. Explore how flow and temperature work together.</p></header>
+    <section class="experiment" aria-label="Interactive sink">
+      <div class="sink">
+        <div class="deck">
+          <div class="control hot-control">
+            <label id="hot-label">HOT <span id="hot-value">0</span> / 5</label>
+            <div class="dial" id="hot-knob" role="slider" tabindex="0" aria-labelledby="hot-label" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" aria-valuetext="0 of 5, off">
+              <div class="handle"><i></i></div>
+            </div>
+            <p>0 · 1 · 2 · 3 · 4 · 5</p>
+          </div>
+          <div class="faucet" aria-hidden="true"><div class="spout"></div><div class="base"></div></div>
+          <div class="control cold-control">
+            <label id="cold-label">COLD <span id="cold-value">0</span> / 5</label>
+            <div class="dial" id="cold-knob" role="slider" tabindex="0" aria-labelledby="cold-label" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" aria-valuetext="0 of 5, off">
+              <div class="handle"><i></i></div>
+            </div>
+            <p>0 · 1 · 2 · 3 · 4 · 5</p>
+          </div>
+        </div>
+        <div class="basin"><div class="drain"></div></div>
+        <div id="stream" aria-hidden="true"></div>
       </div>
-      <div class="knob-group"><div class="knob-label" id="coldLabel">Cold knob <output id="coldValue">0</output></div>
-      <div class="dial"><span class="scale start">0</span><span class="scale end">5</span><div id="cold" class="knob cold" role="slider" tabindex="0" aria-labelledby="coldLabel" aria-describedby="knobHelp" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><span class="handle"></span><span class="cap">C</span></div></div>
+      <p class="instructions">Drag around a knob: clockwise to open, counterclockwise to close. You can also scroll or use arrow keys. Warm means 40–60% hot water.</p>
+      <div class="readings" aria-live="polite" aria-atomic="true">
+        <div><small>WATER STATE</small><strong id="water-state">Off</strong></div>
+        <div><small>TOTAL FLOW</small><strong><span id="total-flow">0</span><em> / 10</em></strong></div>
+        <div><small>HOT / COLD MIX</small><strong id="mix">—</strong></div>
       </div>
-    </div>
-    </div>
-    <div class="readings" role="status" aria-live="polite"><p>Temperature <strong id="temperature">Off</strong></p><p>Flow strength <strong id="flow">0 / 10</strong></p></div>
-    <button id="reset" type="button">Turn both off</button>
-    <p class="note">A simplified model: the controls represent flow, not degrees. Stream color represents temperature.</p>
+      <button id="off-button" type="button">Turn both off</button>
+    </section>
+    <aside><h2>Try this</h2><p>Set both knobs to 1, then both to 3. The stream gets wider, but stays the same purple. Now turn only the hot knob higher: watch the mix turn redder.</p></aside>
   </main>
-  <script src="script.js"></script>
 </body>
 </html>
